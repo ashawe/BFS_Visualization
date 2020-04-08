@@ -101,6 +101,11 @@ $( document ).ready(function() {
     {
     	if( window.found || window.arr.length == 0 ){
     		clearInterval(window.timer);
+    		$("#start").prop("disabled",false);
+	    	$("#clear").prop("disabled",false);
+	    	$("#reset").prop("disabled",false);
+	    	$("#selectStart").prop("disabled",false);
+	    	$("#selectEnd").prop("disabled",false);
     		if(!window.found)
     		{
     			alert("No Path Found");
@@ -182,6 +187,11 @@ $( document ).ready(function() {
     }
 
     $("#start").click(function(){
+    	$("#start").prop("disabled",true);
+    	$("#clear").prop("disabled",true);
+    	$("#reset").prop("disabled",true);
+    	$("#selectStart").prop("disabled",true);
+    	$("#selectEnd").prop("disabled",true);
 		if(window.IS_SELECTED){
 			window.arr = Array();
 			window.startNode = $('.start');
@@ -190,7 +200,7 @@ $( document ).ready(function() {
 			window.found = false;
 			window.arr.push(window.startNode)
 			if( !window.found || window.arr.length != 0 ){
-				window.timer = setInterval(bfs,1);	
+				window.timer = setInterval(bfs);	
 			}
 		}
     });
