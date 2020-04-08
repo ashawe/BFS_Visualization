@@ -1,0 +1,19 @@
+body{
+	margin-top: 20px;
+	margin-left: 40px;
+}
+
+#canvas{
+	margin-top: 20px;
+}
+
+.row{
+	display: flex;
+	flex-direction: row;
+}
+
+.cell{
+	width: 20px;
+	height: 20px;
+	border: 1px solid #c2c2c2;
+}
