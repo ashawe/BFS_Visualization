@@ -17,3 +17,7 @@ body{
 	height: 20px;
 	border: 1px solid #c2c2c2;
 }
+
+.cell.wall{
+	background-color: black;
+}
