@@ -60,10 +60,15 @@ $( document ).ready(function() {
     	});
     });
 
-    $("#clear").click(function(){
+    $("#reset").click(function(){
 		$(".cell").removeClass("wall");
 		$(".cell").removeClass("start");
 		$(".cell").removeClass("end");
+		$(".cell").removeClass("visited");
+		$(".cell").removeClass("path");
+    });
+
+    $("#clear").click(function(){
 		$(".cell").removeClass("visited");
 		$(".cell").removeClass("path");
     });
@@ -185,7 +190,7 @@ $( document ).ready(function() {
 			window.found = false;
 			window.arr.push(window.startNode)
 			if( !window.found || window.arr.length != 0 ){
-				window.timer = setInterval(bfs,5);	
+				window.timer = setInterval(bfs,1);	
 			}
 		}
     });
