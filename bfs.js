@@ -14,7 +14,7 @@ $( document ).ready(function() {
 			$("#r" + i + "").append(cell_part1 + "" + i + "c" + j + "" + cell_part2);
     	}
     }
-
+    
     $(document).mousedown(function(){
     	window.IS_CLICKED = true;
     });
@@ -53,5 +53,4 @@ $( document ).ready(function() {
     		dragger(e,"enter");
     	});
     });
-
 });
