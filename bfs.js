@@ -2,6 +2,12 @@ $( document ).ready(function() {
 
 	var ROW_NUM = 25;	// number of rows
 	var COL_NUM = 50;	// number of cells in 1 row
+	window.IS_CLICKED = false;
+	window.IS_SELECTED = false;
+	window.IS_START_SELECTED = false;
+	window.IS_END_SELECTED = false;
+	window.IS_SELECTING_START = false;
+	window.IS_SELECTING_END = false;
 
 	var elem_part1 = "<div class='row' id='r";
 	var elem_part2 = "'></div>";
@@ -71,4 +77,117 @@ $( document ).ready(function() {
 		window.IS_SELECTING_END = true;
 		$(".cell").removeClass("end");
     });
+
+    function getElement(elem,tblr){
+    	var id = $(elem).attr("id"); 
+    	id = id.slice(1);
+    	var i = id.substr(0,id.indexOf('c'));
+    	var j = id.substr(id.indexOf('c')+1);
+    	switch(tblr)
+    	{
+    		case 't':return( $("#c" + ( i - 1 ) + "c" + j + "") );break;
+    		case 'b':return( $("#c" + ( i - -1 ) + "c" + j + "") );break;
+    		case 'l':return( $("#c" + i + "c" + ( j - 1 ) + "") );break;
+    		case 'r':return( $("#c" + i + "c" + ( j - -1 ) + "") );break;
+    	}    	
+    }
+
+    function bfs()
+    {
+    	if( window.found || window.arr.length == 0 ){
+    		clearInterval(window.timer);
+    		if(!window.found)
+    		{
+    			alert("No Path Found");
+    			return;
+    		}
+			var currElem = "#" + $(window.endNode).attr("prev-elem");
+			while( currElem != "#0" )
+			{
+				$(currElem).addClass("path");
+				currElem = "#" + $(currElem).attr("prev-elem");
+			}
+			return;
+    	}
+    	var currElem = window.arr.shift();
+					
+		// top
+		var top = getElement(currElem,"t");
+		if($(top).hasClass("end"))
+		{
+			$(top).attr("prev-elem",$(currElem).attr("id"));
+			window.found = true;
+			return;
+		}
+		
+		if( $(top).hasClass("cell") && !$(top).hasClass("wall") && !$(top).hasClass("visited") && !$(top).hasClass("start") && !$(top).hasClass("end"))
+		{
+			$(top).attr("prev-elem",$(currElem).attr("id"));
+			$(top).addClass("visited");
+			window.arr.push(top);
+		}
+		
+		// left
+		var left = getElement(currElem,"l");
+		if($(left).hasClass("end"))
+		{
+			$(left).attr("prev-elem",$(currElem).attr("id"));
+			window.found = true;
+			return;
+		}
+		
+		if( $(left).hasClass("cell") && !$(left).hasClass("wall") && !$(left).hasClass("visited") && !$(left).hasClass("start") && !$(left).hasClass("end"))
+		{
+			$(left).attr("prev-elem", $(currElem).attr("id"));
+			$(left).addClass("visited");
+			window.arr.push(left);
+		}
+		
+		// bottom
+		var bottom = getElement(currElem,"b");
+		if($(bottom).hasClass("end"))
+		{
+			$(bottom).attr("prev-elem",$(currElem).attr("id"));
+			window.found = true;
+			return;
+		}
+		
+		if(  $(bottom).hasClass("cell") && !$(bottom).hasClass("wall") && !$(bottom).hasClass("visited") && !$(bottom).hasClass("start") && !$(bottom).hasClass("end"))
+		{
+			$(bottom).attr("prev-elem",$(currElem).attr("id"));
+			$(bottom).addClass("visited");
+			window.arr.push(bottom);
+		}
+		
+		// right 
+		var right = getElement(currElem,"r");
+		if($(right).hasClass("end"))
+		{
+			$(right).attr("prev-elem",$(currElem).attr("id"));
+			window.found = true;
+			return;
+		}
+		
+		if(  $(right).hasClass("cell") && !$(right).hasClass("wall") && !$(right).hasClass("visited") && !$(right).hasClass("start") && !$(right).hasClass("end"))
+		{
+			$(right).attr("prev-elem",$(currElem).attr("id"));
+			$(right).addClass("visited");
+			window.arr.push(right);
+		}
+    }
+
+    $("#start").click(function(){
+		if(window.IS_SELECTED){
+			window.arr = Array();
+			window.startNode = $('.start');
+			$(window.startNode).attr("prev-elem",0);
+			window.endNode = $('.end');
+			window.found = false;
+			window.arr.push(window.startNode)
+			if( !window.found || window.arr.length != 0 ){
+				window.timer = setInterval(bfs,5);	
+			}
+		}
+    });
+
 });

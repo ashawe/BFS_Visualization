@@ -25,6 +25,15 @@ body{
 .cell.start{
 	background-color: green !important;
 }
+
 .cell.end{
 	background-color: red;
+}
+
+.cell.visited{
+	background-color: blue;
+}
+
+.cell.path{
+	background-color: yellow;
 }
