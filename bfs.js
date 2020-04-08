@@ -14,7 +14,7 @@ $( document ).ready(function() {
 			$("#r" + i + "").append(cell_part1 + "" + i + "c" + j + "" + cell_part2);
     	}
     }
-    
+
     $(document).mousedown(function(){
     	window.IS_CLICKED = true;
     });
@@ -52,5 +52,23 @@ $( document ).ready(function() {
     	$(this).mouseenter(function(e){
     		dragger(e,"enter");
     	});
+    });
+
+    $("#clear").click(function(){
+		$(".cell").removeClass("wall");
+		$(".cell").removeClass("start");
+		$(".cell").removeClass("end");
+		$(".cell").removeClass("visited");
+		$(".cell").removeClass("path");
+    });
+
+    $("#selectStart").click(function(){
+		window.IS_SELECTING_START = true;
+		$(".cell").removeClass("start");
+    });
+
+    $("#selectEnd").click(function(){
+		window.IS_SELECTING_END = true;
+		$(".cell").removeClass("end");
     });
 });

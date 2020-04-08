@@ -21,3 +21,10 @@ body{
 .cell.wall{
 	background-color: black;
 }
+
+.cell.start{
+	background-color: green !important;
+}
+.cell.end{
+	background-color: red;
+}
