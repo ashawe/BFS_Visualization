@@ -4,7 +4,32 @@ body{
 }
 
 #canvas{
-	margin-top: 20px;
+	margin: 20px;
+}
+
+.button{
+	background-color: #4CAF50; /* Green */
+	border: 5px solid #4CAF50;
+  	color: white;
+  	padding: 7px 20px;
+	margin-left: 20px;
+	margin-right: 20px;
+  	text-align: center;
+  	text-decoration: none;
+  	display: inline-block;
+  	font-size: 16px;
+	border-radius: 12px;
+}
+
+.button:hover {
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+	cursor: pointer;
+}
+
+.button:active{
+	Background-color: #2c522d;
+	border: 5px solid rgb(47, 65, 47);
+	box-shadow: 0 5px 10px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
 .row{
